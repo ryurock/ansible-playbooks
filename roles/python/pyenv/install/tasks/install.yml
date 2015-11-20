@@ -1,0 +1,9 @@
+- name: Install pyenv from homebrew
+  action:
+    homebrew name=pyenv state=present
+  when: "ansible_os_family == 'Darwin'"
+
+- name: Install pyenv from pyenv_installer
+  action:
+    shell curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+  when: "ansible_os_family == 'RedHat'"

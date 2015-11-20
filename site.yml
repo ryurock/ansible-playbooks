@@ -1,0 +1,9 @@
+- hosts: all
+  sudo: yes
+
+- hosts: OSX
+  roles:
+    - { role: zsh/zshrc/common}
+    - { role: python/pyenv/install}
+    - { role: python/pyenv/python-build}
+    - { role: homebrew/brew/cask}

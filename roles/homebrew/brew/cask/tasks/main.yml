@@ -1,0 +1,2 @@
+- name: brew install brew-cask
+  homebrew: name=caskroom/cask/brew-cask state=present

@@ -1,0 +1,54 @@
+- name: Check using shell register in file path
+  shell: |
+      if [ `echo $SHELL | grep -c "zsh"` -eq 1 ]; then
+        echo "~/.zshrc"
+      elif [ `echo $SHELL | grep -c "bash"` -eq 1 ]; then
+        if [ `uname` = "Linux" ]; then
+          echo "~/.bashrc"
+        elif [ `uname` = "Darwin" ]; then
+          echo "~/.bash_profile"
+        fi
+      fi
+  # 書き込むログインshell fileを保存しておきたいだけなので常にokの状態に保つ
+  # see http://qiita.com/ryurock/items/639e5f7e49d25c3b6d75
+  changed_when: False
+  register: shell_configure_file
+
+- name: Check using shell register in dir
+  shell: |
+      if [ `echo $SHELL | grep -c "zsh"` -eq 1 ]; then
+        echo "~/.zsh"
+      elif [ `echo $SHELL | grep -c "bash"` -eq 1 ]; then
+        echo "~/.bash"
+      fi
+  changed_when: False
+  register: shell_configure_dir
+
+- name: Create directory shell_configure_file name
+  action:
+    file path={{ shell_configure_dir.stdout }} state=directory mode=0755
+
+- name: Template present pyenv.sh
+  action:
+    template src=pyenv.sh.j2 dest={{ shell_configure_dir.stdout }}/pyenv.sh
+ 
+- name: Check shell_configure_file source pyenv.sh
+  action:
+    shell cat {{ shell_configure_file.stdout }} | grep -c 'source {{ shell_configure_dir.stdout }}/pyenv.sh'
+  failed_when: no
+  changed_when: False
+  register: command_result
+
+- name: Add shell_configure_file source pyenv.sh
+  action: 
+    lineinfile dest={{shell_configure_file.stdout}} line='source {{ shell_configure_dir.stdout }}/pyenv.sh'
+  when: command_result.stdout == "0"
+  notify:
+    - execute source shell_configure_file
+
+- name: Shell of the added configuration file is rewritten in the case of bash
+  action: 
+    replace dest={{shell_configure_dir.stdout}}/pyenv.sh regexp='pyenv init - zsh' replace='pyenv init -'
+  when: shell_configure_file.stdout == "~/.bashrc"
+  notify:
+    - execute source shell_configure_file

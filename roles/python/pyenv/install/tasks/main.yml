@@ -1,0 +1,3 @@
+- include: install.yml
+- include: add_shell_configure.yml
+

@@ -1,0 +1,19 @@
+- name: Check pyenv Python version
+  shell: pyenv versions | grep -c '{{ pythonBuildVersion }}'
+  failed_when: no
+  changed_when: False
+  register: command_result
+
+- name: Install Python from pyenv
+  shell: pyenv install {{ pythonBuildVersion }}
+  when: command_result.stdout == "0"
+
+- name: Check pyenv global Python version
+  shell: pyenv version| grep -c '{{ pythonBuildVersion }}'
+  failed_when: no
+  changed_when: False
+  register: command_result
+
+- name: Build Python change local
+  shell: pyenv global {{ pythonBuildVersion }}; pyenv rehash
+  when: command_result.stdout == "0"
