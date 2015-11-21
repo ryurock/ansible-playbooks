@@ -3,8 +3,9 @@
 
 - hosts: OSX
   roles:
-    - { role: zsh/zshrc/common}
+    - { role: login-shell/dotfile/common}
     - { role: git/gitconfig}
     - { role: python/pyenv/install}
     - { role: python/pyenv/python-build}
+    - { role: homebrew/install}
     - { role: homebrew/brew/cask}

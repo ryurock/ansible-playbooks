@@ -1,0 +1,13 @@
+- name: Check homebrew installed
+  shell: |
+    if which brew >/dev/null 2>&1; then
+      echo "installed"
+    else
+      echo "not installed"
+    fi
+  register: installed  
+  changed_when: False
+
+- name: Install homebrew
+  shell: ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  when: installed.stdout != "installed"
