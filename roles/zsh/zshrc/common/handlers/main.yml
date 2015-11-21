@@ -1,2 +1,0 @@
-- name: execute source shell_configure_file
-  shell: source {{ shell_configure_file.stdout }}
