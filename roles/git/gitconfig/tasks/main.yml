@@ -1,0 +1,9 @@
+- name: Added .gitconfig
+  template: src=gitconfig.j2 dest={{ ansible_env.HOME }}/.gitconfig mode=0755
+
+# shellでexpectを使用してやろうと思ったけれども、上手くいかず断念
+#- name: Check .gitconfig section user
+#  shell: cat {{ ansible_env.HOME }}/.gitconfig | grep -c '\[user\]'
+#  failed_when: no
+#  changed_when: False
+#  register: command_result
