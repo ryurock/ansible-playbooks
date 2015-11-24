@@ -1,2 +1,4 @@
 - name: Install the chrome-cli in the brew.
   homebrew: name=chrome-cli state=present
+  dependencies:
+    - { role: homebrew/brew-cask/google-chrome }
