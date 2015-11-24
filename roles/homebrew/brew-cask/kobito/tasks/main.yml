@@ -1,0 +1,2 @@
+- name: Install the kobito in the brew-cask
+  homebrew_cask: name=kobito state=present
