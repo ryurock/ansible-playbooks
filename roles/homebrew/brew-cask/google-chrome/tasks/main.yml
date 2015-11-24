@@ -1,0 +1,2 @@
+- name: Install the google-chrome in the brew-cask
+  homebrew_cask: name=google-chrome state=present

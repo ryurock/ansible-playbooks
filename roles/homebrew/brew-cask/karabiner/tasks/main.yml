@@ -1,0 +1,2 @@
+- name: Install the karabiner in the brew-cask. see https://pqrs.org/osx/karabiner/
+  homebrew_cask: name=karabiner state=present

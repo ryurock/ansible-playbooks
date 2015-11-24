@@ -1,0 +1,13 @@
+- name: Check oh-my-zsh installed
+  shell: |
+    if [ -e ~/.oh-my-zsh ]; then
+      echo "installed"
+    else
+      echo "not installed"
+    fi
+  register: installed  
+  changed_when: False
+
+- name: Install oh-my-zsh
+  shell: curl -L https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh | sh
+  when: installed.stdout != "installed"

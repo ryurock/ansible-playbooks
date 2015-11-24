@@ -1,0 +1,2 @@
+- name: Install the shiftit in the brew-cask see https://github.com/fikovnik/ShiftIt
+  homebrew_cask: name=shiftit state=present

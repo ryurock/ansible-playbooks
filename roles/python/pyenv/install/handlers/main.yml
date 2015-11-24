@@ -1,2 +1,2 @@
-- name: execute source shell_configure_file
+- name: execute source shell_dotfile
   shell: source {{ shell_dotfile.stdout }}

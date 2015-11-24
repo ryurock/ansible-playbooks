@@ -1,0 +1,11 @@
+- name: Check install the lightshot
+  stat: path=/Applications/Lightshot\ Screenshot.app
+  register: installed
+  when: ansible_os_family == 'Darwin'
+
+# brew-caskで公開されていないかつsourceがオープンソースではないためchromeで一旦開かせる
+- name: open Chrome App URL
+  shell: open -a "/Applications/Safari.app" https://itunes.apple.com/us/app/lightshot-screenshot/id526298438
+  when: 
+    - installed.stat.exists == false
+    - ansible_os_family == 'Darwin'
