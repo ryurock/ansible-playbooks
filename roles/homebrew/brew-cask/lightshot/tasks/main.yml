@@ -1,4 +1,4 @@
-- name: Check install the lightshot
+- name: Check lightshot-Screenshot.app installed
   stat: path=/Applications/Lightshot\ Screenshot.app
   register: installed
   when: ansible_os_family == 'Darwin'
