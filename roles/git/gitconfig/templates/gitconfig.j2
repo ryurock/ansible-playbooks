@@ -1,9 +1,3 @@
-[color]
-    ui = auto
-[alias]
-    st = status
-    co = checkout
-    ci = commit
-    br = branch
-    graph = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
-    gr = log --graph --date-order -C -M --pretty=format:\"<%h> %ad [%an] %Cgreen%d%Creset %s\" --all --date=short
+[include]
+  path = ~/.gitconfig.common
+  path = ~/.gitconfig.user
