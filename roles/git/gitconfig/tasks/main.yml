@@ -1,9 +1,41 @@
 - name: Added .gitconfig
   template: src=gitconfig.j2 dest={{ ansible_env.HOME }}/.gitconfig mode=0755
 
-# shellでexpectを使用してやろうと思ったけれども、上手くいかず断念
-#- name: Check .gitconfig section user
-#  shell: cat {{ ansible_env.HOME }}/.gitconfig | grep -c '\[user\]'
-#  failed_when: no
-#  changed_when: False
-#  register: command_result
+# 共通のgit設定をテンプレートに展開する
+- name: Extract Template .gitconfig.common
+  template: src=gitconfig.common.j2 dest={{ ansible_env.HOME }}/.gitconfig.common mode=0755
+
+- name: Find global .gitconfig include file .gitconfig.common
+  shell: |
+      if [ `cat ~/.gitconfig | grep -c "gitconfig.common"` -eq 1 ]; then
+        echo "included"
+      else
+        echo "not included"
+      fi
+  changed_when: False
+  register: is_included
+
+- name: Added .gitconfig include file .gitconfig.common
+  shell: echo "  path = ~/.gitconfig.common" >> ~/.gitconfig
+  when: is_included.stdout == 'not included'
+
+- name: Find global .gitconfig include file .gitconfig.user
+  shell: |
+      if [ `cat ~/.gitconfig | grep -c "gitconfig.user"` -eq 1 ]; then
+        echo "included"
+      else
+        echo "not included"
+      fi
+  changed_when: False
+  register: is_included
+
+# Userセクションのgit設定をテンプレートに展開する
+- name: Extract Template .gitconfig.user
+  template: src=gitconfig.user.j2 dest={{ ansible_env.HOME }}/.gitconfig.user mode=0755
+  when: 
+    (is_included.stdout == 'not included') or
+    (gitconfig.user is not none or gitconfig.email is not none)
+
+- name: Added .gitconfig include file .gitconfig.user
+  shell: echo "  path = ~/.gitconfig.user" >> ~/.gitconfig
+  when: is_included.stdout == 'not included'

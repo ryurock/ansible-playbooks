@@ -1,0 +1,4 @@
+[color]
+  user = {% if gitconfig.user is not none %} {{ gitconfig.user }} {% endif %}
+
+  email = {% if gitconfig.email is not none %} {{ gitconfig.email }} {% endif %}

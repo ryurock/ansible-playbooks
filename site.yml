@@ -2,10 +2,15 @@
   sudo: yes
 
 - hosts: OSX
+  vars:
+    - gitconfig:
+        user: #gitconfigにユーザー追加したい場合は記載してください
+        email: #gitconfigにメールアドレスを追加したい場合は記載してください
   roles:
     - { role: login-shell/dotfile/common }
     - { role: login-shell/zsh/oh-my-zsh/install }
     - { role: git/gitconfig }
+    - { role: vim/install }
     - { role: python/pyenv/install }
     - { role: python/pyenv/python-build }
     - { role: homebrew/install }
@@ -19,6 +24,5 @@
     - { role: homebrew/brew-cask/google-chrome }
     - { role: homebrew/brew-cask/google-japanese-ime }
     - { role: homebrew/brew-cask/shiftit }
-    - { role: homebrew/brew-cask/kobito }
     - { role: homebrew/brew-cask/kobito }
     - { role: homebrew/brew-cask/lightshot }
