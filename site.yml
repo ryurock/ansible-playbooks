@@ -3,19 +3,22 @@
 
 - hosts: OSX
   roles:
-    - { role: login-shell/dotfile/common}
-    - { role: login-shell/zsh/oh-my-zsh/install}
-    - { role: git/gitconfig}
-    - { role: python/pyenv/install}
-    - { role: python/pyenv/python-build}
-    - { role: homebrew/install}
-    - { role: homebrew/brew/cask}
-    - { role: homebrew/brew/curl}
-    - { role: homebrew/brew/nkf}
-    - { role: homebrew/brew/nmap}
-    - { role: homebrew/brew/wget}
-    - { role: homebrew/brew-cask/iterm2}
-    - { role: homebrew/brew-cask/karabiner}
-    - { role: homebrew/brew-cask/google-chrome}
-    - { role: homebrew/brew-cask/shiftit}
-    - { role: homebrew/brew-cask/lightshot}
+    - { role: login-shell/dotfile/common }
+    - { role: login-shell/zsh/oh-my-zsh/install }
+    - { role: git/gitconfig }
+    - { role: python/pyenv/install }
+    - { role: python/pyenv/python-build }
+    - { role: homebrew/install }
+    - { role: homebrew/brew/cask }
+    - { role: homebrew/brew/curl }
+    - { role: homebrew/brew/nkf }
+    - { role: homebrew/brew/nmap }
+    - { role: homebrew/brew/wget }
+    - { role: homebrew/brew-cask/iterm2 }
+    - { role: homebrew/brew-cask/karabiner }
+    - { role: homebrew/brew-cask/google-chrome }
+    - { role: homebrew/brew-cask/google-japanese-ime }
+    - { role: homebrew/brew-cask/shiftit }
+    - { role: homebrew/brew-cask/kobito }
+    - { role: homebrew/brew-cask/kobito }
+    - { role: homebrew/brew-cask/lightshot }
