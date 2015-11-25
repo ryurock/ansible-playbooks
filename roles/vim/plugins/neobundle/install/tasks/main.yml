@@ -1,0 +1,8 @@
+- name: neobundle Create Dir
+  file: path={{ ansible_env.HOME }}/.vim/bundle state=directory owner={{ ansible_env.USER }} mode=0775
+
+- name: Git Clone neobundle
+  git: repo=https://github.com/Shougo/neobundle.vim
+       dest={{ ansible_env.HOME }}/.vim/bundle/neobundle.vim
+       update=no
+
