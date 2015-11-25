@@ -11,6 +11,9 @@
     - { role: login-shell/zsh/oh-my-zsh/install }
     - { role: git/gitconfig }
     - { role: vim/install }
+    - { role: vim/vimrc }
+    - { role: vim/plugins/neobundle/install }
+    - { role: vim/color-scheme/hybrid }
     - { role: python/pyenv/install }
     - { role: python/pyenv/python-build }
     - { role: homebrew/install }

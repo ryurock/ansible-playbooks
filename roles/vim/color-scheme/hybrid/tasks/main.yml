@@ -1,0 +1,9 @@
+- name: color-scheme Create Dir
+  file: path={{ ansible_env.HOME }}/.vim/colors state=directory owner={{ ansible_env.USER }} mode=0775
+
+- name: Fetch color-scheme
+  get_url: url=https://raw.githubusercontent.com/w0ng/vim-hybrid/master/colors/hybrid.vim dest={{ ansible_env.HOME }}/.vim/colors/hybrid.vim mode=0755
+
+
+#- name: Extract Template colorscheme file
+#  template: src=hybrid.vim dest={{ ansible_env.HOME }}/.vim/colors/hybrid.vim mode=0755

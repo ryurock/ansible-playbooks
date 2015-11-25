@@ -1,0 +1,8 @@
+- name: Install vim from homebrew
+  action:
+    homebrew name=vim state=present
+  when: "ansible_os_family == 'Darwin'"
+
+- name: Install vim from yum
+  yum: pkg=vim-enhanced state=present
+  when: "ansible_os_family == 'RedHat'"
