@@ -21,9 +21,9 @@
     - { role: tree/install }
     - { role: nkf/install }
     - { role: curl/install }
+    - { role: nmap/install }
+    - { role: wget/install }
     - { role: homebrew/brew/cask }
-    - { role: homebrew/brew/nmap }
-    - { role: homebrew/brew/wget }
     - { role: homebrew/brew-cask/iterm2 }
     - { role: homebrew/brew-cask/karabiner }
     - { role: homebrew/brew-cask/google-chrome }

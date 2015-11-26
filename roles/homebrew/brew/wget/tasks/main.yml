@@ -1,2 +1,0 @@
-- name: Install the wget in the brew.
-  homebrew: name=wget state=present

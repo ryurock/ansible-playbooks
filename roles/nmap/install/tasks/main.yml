@@ -1,0 +1,8 @@
+- name: Install the nmap in the brew.
+  homebrew: name=nmap state=present
+  when: "ansible_os_family == 'Darwin'"
+
+- name: Install nmap from yum
+  yum: pkg=nmap state=present
+  when: "ansible_os_family == 'RedHat'"
+
