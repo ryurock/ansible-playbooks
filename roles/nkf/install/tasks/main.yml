@@ -1,0 +1,8 @@
+- name: Install the nkf from homebrew
+  homebrew: name=nkf state=present
+  when: "ansible_os_family == 'Darwin'"
+
+- name: Install the nkf from yum
+  yum: pkg=nkf state=present
+  when: "ansible_os_family == 'RedHat'"
+

@@ -1,2 +1,0 @@
-- name: Install the nkf in the brew.
-  homebrew: name=nkf state=present
