@@ -16,6 +16,7 @@
     - { role: vim/color-scheme/hybrid }
     - { role: python/pyenv/install }
     - { role: python/pyenv/python-build }
+    - { role: fonts/ricty-diminished/install }
     - { role: homebrew/install }
     - { role: homebrew/brew/cask }
     - { role: homebrew/brew/curl }
