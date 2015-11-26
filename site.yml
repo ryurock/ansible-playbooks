@@ -20,8 +20,8 @@
     - { role: homebrew/install }
     - { role: tree/install }
     - { role: nkf/install }
+    - { role: curl/install }
     - { role: homebrew/brew/cask }
-    - { role: homebrew/brew/curl }
     - { role: homebrew/brew/nmap }
     - { role: homebrew/brew/wget }
     - { role: homebrew/brew-cask/iterm2 }

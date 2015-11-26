@@ -1,2 +1,7 @@
 - name: Install the curl in the brew.
   homebrew: name=curl state=present
+  when: "ansible_os_family == 'Darwin'"
+
+- name: Install curl from yum
+  yum: pkg=curl state=present
+  when: "ansible_os_family == 'RedHat'"
