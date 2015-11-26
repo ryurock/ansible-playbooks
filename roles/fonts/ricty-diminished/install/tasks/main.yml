@@ -1,0 +1,24 @@
+- name: Fetch get_url RictyDiminished-Regular.ttf
+  get_url: url=https://github.com/yascentur/RictyDiminished/raw/master/RictyDiminished-Regular.ttf dest={{ ansible_env.HOME }}/Library/Fonts/RictyDiminished-Regular.ttf mode=0755
+
+- name: Fetch get_url RictyDiminished-Bold.ttf
+  get_url: url=https://github.com/yascentur/RictyDiminished/raw/master/RictyDiminished-Bold.ttf dest={{ ansible_env.HOME }}/Library/Fonts/RictyDiminished-Bold.ttf mode=0755
+
+- name: Fetch get_url RictyDiminished-BoldOblique.ttf
+  get_url: url=https://github.com/yascentur/RictyDiminished/raw/master/RictyDiminished-BoldOblique.ttf dest={{ ansible_env.HOME }}/Library/Fonts/RictyDiminished-BoldOblique.ttf mode=0755
+
+- name: Fetch get_url RictyDiminished-Oblique.ttf
+  get_url: url=https://github.com/yascentur/RictyDiminished/raw/master/RictyDiminished-Oblique.ttf dest={{ ansible_env.HOME }}/Library/Fonts/RictyDiminished-Oblique.ttf mode=0755
+
+- name: Fetch get_url RictyDiminishedDiscord-Bold.ttf
+  get_url: url=https://github.com/yascentur/RictyDiminished/raw/master/RictyDiminishedDiscord-Bold.ttf dest={{ ansible_env.HOME }}/Library/Fonts/RictyDiminishedDiscord-Bold.ttf mode=0755
+
+- name: Fetch get_url RictyDiminishedDiscord-BoldOblique.ttf
+  get_url: url=https://github.com/yascentur/RictyDiminished/raw/master/RictyDiminishedDiscord-BoldOblique.ttf dest={{ ansible_env.HOME }}/Library/Fonts/RictyDiminishedDiscord-BoldOblique.ttf mode=0755
+
+- name: Fetch get_url RictyDiminishedDiscord-Oblique.ttf
+  get_url: url=https://github.com/yascentur/RictyDiminished/raw/master/RictyDiminishedDiscord-Oblique.ttf dest={{ ansible_env.HOME }}/Library/Fonts/RictyDiminishedDiscord-Oblique.ttf mode=0755
+
+- name: Fetch get_url RictyDiminishedDiscord-Regular.ttf
+  get_url: url=https://github.com/yascentur/RictyDiminished/raw/master/RictyDiminishedDiscord-Regular.ttf dest={{ ansible_env.HOME }}/Library/Fonts/RictyDiminishedDiscord-Regular.ttf mode=0755
+
