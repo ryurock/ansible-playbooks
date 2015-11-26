@@ -1,2 +1,0 @@
-- name: Install the nmap in the brew.
-  homebrew: name=nmap state=present
