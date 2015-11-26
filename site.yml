@@ -18,6 +18,7 @@
     - { role: python/pyenv/python-build }
     - { role: fonts/ricty-diminished/install }
     - { role: homebrew/install }
+    - { role: tree/install }
     - { role: homebrew/brew/cask }
     - { role: homebrew/brew/curl }
     - { role: homebrew/brew/nkf }

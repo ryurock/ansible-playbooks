@@ -1,0 +1,8 @@
+- name: Install tree from homebrew
+  action:
+    homebrew name=tree state=present
+  when: "ansible_os_family == 'Darwin'"
+
+- name: Install tree from yum
+  yum: pkg=tree state=present
+  when: "ansible_os_family == 'RedHat'"
