@@ -1,2 +1,0 @@
-- name: Install the curl in the brew.
-  homebrew: name=curl state=present
