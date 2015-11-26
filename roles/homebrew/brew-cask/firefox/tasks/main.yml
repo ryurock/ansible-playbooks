@@ -1,0 +1,2 @@
+- name: Install the firefox in the brew-cask
+  homebrew_cask: name=firefox state=present

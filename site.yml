@@ -27,6 +27,7 @@
     - { role: homebrew/brew-cask/iterm2 }
     - { role: homebrew/brew-cask/karabiner }
     - { role: homebrew/brew-cask/google-chrome }
+    - { role: homebrew/brew-cask/firefox }
     - { role: homebrew/brew-cask/google-japanese-ime }
     - { role: homebrew/brew-cask/shiftit }
     - { role: homebrew/brew-cask/kobito }
