@@ -12,15 +12,12 @@ if has('vim_starting')
   " Required:
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
-
 " Required:
 call neobundle#begin(expand('~/.vim/bundle/'))
 
 " Let NeoBundle manage NeoBundle
 " Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
-
-
 """"""""""""""""""""""""""""""
 " My NeoBundle
 """"""""""""""""""""""""""""""
@@ -34,22 +31,47 @@ NeoBundle 'Shougo/vimproc.vim', {
 \     'unix' : 'gmake',
 \    },
 \ }
-
+" Unite
 NeoBundle 'Shougo/unite.vim'
+
 " vimでshell実行
 NeoBundle 'Shougo/vimshell'
+
 " alfred的なファイル検索
 NeoBundle 'Shougo/neomru.vim'
 " ソースのアウトライン表示
 NeoBundle 'Shougo/unite-outline'
+
 " VimFiler
 NeoBundle 'Shougo/vimfiler'
+
 " ステータスラインの強化
 NeoBundle 'bling/vim-airline'
-"" vim-airlineでタブもairline風に表示させる
-let g:airline#extensions#tabline#enabled = 1
+
 " uniteでカラースキーマ :Unite -auto-preview colorscheme でプレビューできる
 NeoBundle 'ujihisa/unite-colorscheme'
+
+" Vimの入力補完
+" see http://qiita.com/hide/items/229ff9460e75426a2d07
+NeoBundle 'Shougo/neocomplcache'
+
+" neocomplcacheの設定 ----- Start -----
+
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplcache.
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+" neocomplcacheの設定 ----- End -----
+
+"  scroll に加速機能をつける
+NeoBundle 'yonchu/accelerated-smooth-scroll'
+
 
 """"""""""""""""""""""""""""""
 " My NeoBundle End
@@ -63,7 +85,6 @@ filetype plugin indent on
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 
-
 """"""""""""""""""""""""""""""
 " NeoBundle End
 """"""""""""""""""""""""""""""
@@ -72,6 +93,7 @@ NeoBundleCheck
 """"""""""""""""""""""""""""""
 " 標準的な設定
 """"""""""""""""""""""""""""""
+
 
 " INSERT時にバックスペースをバックスペースとして動作させる。see http://qiita.com/omega999/items/23aec6a7f6d6735d033f
 set backspace=2
@@ -94,9 +116,12 @@ set textwidth=0
 " ビープをならさない
 set vb t_vb=
 
+" QuickFixListのプレビューを利用できるにする
+set modifiable
+
 " color-scheme
 set background=dark
-:colorscheme hybrid
+colorscheme hybrid
 
 """"""""""""""""""""""""""""""
 " タブ・空白特殊文字表示・見え方など
@@ -127,8 +152,6 @@ endif
 
 " タブ空白変換
 set expandtab
-" タブ幅
-set tabstop=2
 
 
 """"""""""""""""""""""""""""""
@@ -163,6 +186,8 @@ set display+=lastline
 set laststatus=2
 " ステータスラインに文字コードと改行文字を表示する
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
+" vim-airlineでタブもairline風に表示させる
+let g:airline#extensions#tabline#enabled = 1
 
 
 """"""""""""""""""""""""""""""
@@ -179,10 +204,24 @@ set ruler
 " カーソルを行頭、行末で止まらないようにする
 set whichwrap=b,s,h,l,<,>,[,]
 
+""""""""""""""""""""""""""""""
+"入力補完
+""""""""""""""""""""""""""""""
+" :でタブを押すと候補が横に表示される
+set wildmenu
+
+" コマンド補完を開始するキー
+set wildchar=<tab>
+
+" リスト表示，最長マッチ
+set wildmode=list:full
+
+" コマンド・検索パターンの履歴数
+set history=1000
 
 
 """"""""""""""""""""""""""""""
-"ショートカットキーマップ
+"キーマップ
 """"""""""""""""""""""""""""""
 "prefix keyの設定
 nmap <Space> [unite]
@@ -190,3 +229,51 @@ nmap <Space> [unite]
 nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer file_mru<CR>
 "スペースキーとeキーでVimfilerの起動
 nnoremap <silent> [unite]f :<C-u>VimFiler<CR>
+
+
+""""""""""""""""""""""""""""""
+" インデント Indent
+""""""""""""""""""""""""""""""
+set autoindent   " 自動でインデント
+set paste        " ペースト時にautoindentを無効に(onにするとautocomplpop.vimが動かない)
+set smartindent  " 新しい行を開始したときに、新しい行のインデントを現在行と同じ量にする。
+
+" softtabstopはTabキー押し下げ時の挿入される空白の量，0の場合はtabstopと同じ，BSにも影響する
+set tabstop=2 shiftwidth=2 softtabstop=0
+
+if has("autocmd")
+  "ファイルタイプの検索を有効にする
+  filetype plugin on
+  "そのファイルタイプにあわせたインデントを利用する
+  filetype indent on
+  " これらのftではインデントを無効に
+  "autocmd FileType php filetype indent off
+
+  autocmd FileType apache     setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType aspvbs     setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType c          setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType cpp        setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType cs         setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType css        setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType diff       setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType eruby      setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType html       setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType java       setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType javascript setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType perl       setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType php        setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType python     setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType ruby       setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType haml       setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType sh         setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType sql        setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType vb         setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType vim        setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType wsh        setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType xhtml      setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType xml        setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType yaml       setlocal sw=2 sts=2 ts=2 et
+  autocmd FileType zsh        setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType scala      setlocal sw=2 sts=2 ts=2 et
+endif
+
