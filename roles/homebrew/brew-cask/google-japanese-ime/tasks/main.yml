@@ -1,2 +1,3 @@
 - name: Install the google-japanese-ime in the brew-cask
   homebrew_cask: name=google-japanese-ime state=present
+  when: "ansible_os_family == 'Darwin'"
