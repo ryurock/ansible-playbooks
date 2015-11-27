@@ -1,0 +1,18 @@
+- name: install dependencies
+  yum: name={{item}} enablerepo=epel state=installed
+  with_items:
+    - gcc
+    - openssl-devel
+    - openssl
+
+- name: Create rbenv plugins dir
+  file: src={{ ansible_env.HOME }}/.rbenv/plugins state=directory mode=0755 group=rbenv
+
+- name: Git Clone ruby-build Plugin
+  git: repo=https://github.com/sstephenson/ruby-build.git
+       dest=/usr/local/rbenv/plugins/ruby-build
+       update=no
+
+- name: ruby-build Dir change group
+  file: path={{ ansible_env.HOME }}/.rbenv/plugins/ruby-build owner={{ ansible_env.SUDO_USER }} group=rbenv mode=0775 state=directory recurse=yes
+
