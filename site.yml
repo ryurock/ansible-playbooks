@@ -35,3 +35,4 @@
     - { role: homebrew/brew-cask/kobito }
     - { role: homebrew/brew-cask/lightshot }
     - { role: homebrew/brew-cask/android-studio }
+    - { role: homebrew/brew-cask/coteditor }

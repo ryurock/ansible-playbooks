@@ -1,0 +1,2 @@
+- name: Install the coteditor in the brew-cask
+  homebrew_cask: name=coteditor state=present
