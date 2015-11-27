@@ -1,0 +1,4 @@
+- name: Git Clone rbenv-binstubs Plugin
+  git: repo=https://github.com/ianheggie/rbenv-binstubs.git
+       dest={{ ansible_env.HOME }}/.rbenv/plugins/rbenv-binstubs
+       update=no
