@@ -1,0 +1,5 @@
+- name: Install peco from homebrew
+  action:
+    homebrew name=peco state=present
+  when: "ansible_os_family == 'Darwin'"
+

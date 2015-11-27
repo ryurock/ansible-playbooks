@@ -23,6 +23,8 @@
     - { role: curl/install }
     - { role: nmap/install }
     - { role: wget/install }
+    - { role: peco/install }
+    - { role: peco/add-configration }
     - { role: homebrew/brew/cask }
     - { role: homebrew/brew-cask/iterm2 }
     - { role: homebrew/brew-cask/karabiner }

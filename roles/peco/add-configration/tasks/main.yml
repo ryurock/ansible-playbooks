@@ -1,0 +1,38 @@
+- name: Template present peco configuration peco
+  template: src=peco.sh.j2 dest={{ ansible_env.HOME }}/.zsh/peco.sh
+
+- name: Check using shell register in file path
+  shell: |
+      if [ `echo $SHELL | grep -c "zsh"` -eq 1 ]; then
+        echo "~/.zshrc"
+      elif [ `echo $SHELL | grep -c "bash"` -eq 1 ]; then
+        if [ `uname` = "Linux" ]; then
+          echo "~/.bashrc"
+        elif [ `uname` = "Darwin" ]; then
+          echo "~/.bash_profile"
+        fi
+      fi
+  changed_when: False
+  register: shell_dotfile
+
+- name: Check using shell register in dir
+  shell: |
+      if [ `echo $SHELL | grep -c "zsh"` -eq 1 ]; then
+        echo "~/.zsh"
+      elif [ `echo $SHELL | grep -c "bash"` -eq 1 ]; then
+        echo "~/.bash"
+      fi
+  changed_when: False
+  register: shell_dotfile_dir
+
+- name: Check shell_dotfile source peco.sh
+  shell: cat {{ shell_dotfile.stdout }} | grep -c 'source {{ shell_dotfile_dir.stdout }}/peco.sh'
+  failed_when: no
+  changed_when: False
+  register: command_result
+
+- name: Add .zshrc source peco.sh
+  lineinfile: dest={{shell_dotfile.stdout}} line='source {{ shell_dotfile_dir.stdout }}/peco.sh'
+  when: command_result.stdout == "0"
+  notify:
+    - execute source shell_dotfile

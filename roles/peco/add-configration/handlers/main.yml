@@ -1,0 +1,4 @@
+- name: execute source shell_dotfile
+  shell: source /etc/profile; source {{ shell_dotfile.stdout }}
+  failed_when: no
+
