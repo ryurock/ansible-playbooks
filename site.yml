@@ -45,3 +45,4 @@
     - { role: homebrew/brew-cask/bettertouchtool }
     - { role: homebrew/brew-cask/clipy }
     - { role: homebrew/brew-cask/cyberduck }
+    - { role: homebrew/brew-cask/slack }

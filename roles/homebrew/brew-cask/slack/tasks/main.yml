@@ -1,0 +1,3 @@
+- name: Install the slack in the brew-cask
+  homebrew_cask: name=slack state=present
+  when: "ansible_os_family == 'Darwin'"
