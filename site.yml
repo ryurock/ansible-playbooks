@@ -39,3 +39,4 @@
     - { role: homebrew/brew-cask/android-studio }
     - { role: homebrew/brew-cask/coteditor }
     - { role: homebrew/brew-cask/virtualbox }
+    - { role: homebrew/brew-cask/vagrant }

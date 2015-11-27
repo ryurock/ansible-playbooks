@@ -1,3 +1,3 @@
-- name: Install the coteditor in the brew-cask
-  homebrew_cask: name=coteditor state=present
+- name: Install the vagrant in the brew-cask
+  homebrew_cask: name=vagrant state=present
   when: "ansible_os_family == 'Darwin'"
