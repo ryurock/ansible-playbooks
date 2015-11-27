@@ -1,0 +1,48 @@
+- name: Check using shell register in file path
+  shell: |
+      if [ `echo $SHELL | grep -c "zsh"` -eq 1 ]; then
+        echo "~/.zshrc"
+      elif [ `echo $SHELL | grep -c "bash"` -eq 1 ]; then
+        if [ `uname` = "Linux" ]; then
+          echo "~/.bashrc"
+        elif [ `uname` = "Darwin" ]; then
+          echo "~/.bash_profile"
+        fi
+      fi
+  changed_when: False
+  register: shell_dotfile
+
+- name: Check using shell register in dir
+  shell: |
+      if [ `echo $SHELL | grep -c "zsh"` -eq 1 ]; then
+        echo "~/.zsh"
+      elif [ `echo $SHELL | grep -c "bash"` -eq 1 ]; then
+        echo "~/.bash"
+      fi
+  changed_when: False
+  register: shell_dotfile_dir
+
+- name: Create directory shell_dotfile name
+  file: path={{ shell_dotfile_dir.stdout }} state=directory mode=0755
+
+- name: Template present rbenv.sh
+  action:
+    template src=rbenv.sh.j2 dest={{ shell_dotfile_dir.stdout }}/rbenv.sh
+
+- name: Check shell_dotfile source rbenv.sh
+  shell: cat {{ shell_dotfile.stdout }} | grep -c 'source {{ shell_dotfile_dir.stdout }}/rbenv.sh'
+  failed_when: no
+  changed_when: False
+  register: command_result
+
+- name: Add shell_dotfile source rbenv.sh
+  lineinfile: dest={{shell_dotfile.stdout}} line='source {{ shell_dotfile_dir.stdout }}/rbenv.sh'
+  when: command_result.stdout == "0"
+  notify:
+    - execute source shell_dotfile
+
+- name: Shell of the added configuration file is rewritten in the case of bash
+  replace: dest={{shell_dotfile_dir.stdout}}/rbenv.sh regexp='rbenv init - zsh' replace='rbenv init -'
+  when: shell_dotfile.stdout == "~/.bashrc"
+  notify:
+    - execute source shell_dotfile

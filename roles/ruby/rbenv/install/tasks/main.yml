@@ -1,0 +1,7 @@
+- include: osx.yml
+  when: "ansible_os_family == 'Darwin'"
+
+- include: redhat.yml
+  when: "ansible_os_family == 'RedHat'"
+
+- include: add_shell_dotfile.yml

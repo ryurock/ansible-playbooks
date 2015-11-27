@@ -1,0 +1,2 @@
+- name: Install ruby-build from homebrew
+  homebrew: name=ruby-build state=present

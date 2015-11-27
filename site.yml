@@ -16,6 +16,8 @@
     - { role: vim/color-scheme/hybrid }
     - { role: python/pyenv/install }
     - { role: python/pyenv/python-build }
+    - { role: ruby/rbenv/install }
+    - { role: ruby/rbenv/plugins/ruby-build/build }
     - { role: fonts/ricty-diminished/install }
     - { role: fonts/source-han-code-jp/install }
     - { role: fonts/hack/install }
