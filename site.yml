@@ -18,6 +18,8 @@
     - { role: python/pyenv/python-build }
     - { role: ruby/rbenv/install }
     - { role: ruby/rbenv/plugins/ruby-build/build }
+    - { role: ruby/rbenv/plugins/rbenv-gem-rehash }
+    - { role: ruby/rbenv/plugins/rbenv-binstubs }
     - { role: fonts/ricty-diminished/install }
     - { role: fonts/source-han-code-jp/install }
     - { role: fonts/hack/install }

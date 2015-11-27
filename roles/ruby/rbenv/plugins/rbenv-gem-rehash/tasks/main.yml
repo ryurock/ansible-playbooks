@@ -1,0 +1,4 @@
+- name: Git Clone rbenv-gem-rehash Plugin
+  git: repo=https://github.com/sstephenson/rbenv-gem-rehash.git
+       dest={{ ansible_env.HOME }}/.rbenv/plugins/rbenv-gem-rehash
+       update=no
