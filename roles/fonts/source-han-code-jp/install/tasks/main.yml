@@ -1,0 +1,14 @@
+- name: Check source-han-code-jp installed
+  stat: path={{ ansible_env.HOME }}/Library/Fonts/SourceHanCodeJP.ttc
+  register: installed
+
+- name: Fetch get_url RictyDiminished-Regular.ttf in tar/gz
+  get_url: url=https://github.com/adobe-fonts/source-han-code-jp/archive/1.004R.tar.gz dest=/tmp/source-han-code-jp.tar.gz mode=0755
+  when: installed.stat.exists == false
+
+- name: extract tar.gz
+  shell: tar xfvz source-han-code-jp.tar.gz chdir=/tmp
+  when: installed.stat.exists == false
+
+- name: copy font
+  copy: src=/tmp/source-han-code-jp-1.004R/OTC/SourceHanCodeJP.ttc dest={{ ansible_env.HOME }}/Library/Fonts/SourceHanCodeJP.ttc
