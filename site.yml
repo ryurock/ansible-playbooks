@@ -8,7 +8,7 @@
         email: #gitconfigにメールアドレスを追加したい場合は記載してください
   roles:
     - { role: login-shell/dotfile/common }
-    - { role: login-shell/zsh/oh-my-zsh/install }
+    - { role: login-shell/zsh/prezto/install }
     - { role: git/gitconfig }
     - { role: vim/install }
     - { role: vim/vimrc }

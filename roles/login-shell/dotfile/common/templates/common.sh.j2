@@ -1,3 +1,20 @@
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='mvim'
+fi
+
+# メモリに保存される履歴の件数
+export HISTSIZE=1000
+
+# 履歴ファイルに保存される履歴の件数
+export SAVEHIST=10000
+
+
+# 開始と終了を記録
+setopt EXTENDED_HISTORY
+
 export LSCOLORS=gxfxcxdxbxegedabagacad
 
 # alias

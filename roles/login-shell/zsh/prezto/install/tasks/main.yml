@@ -1,0 +1,32 @@
+- name: Git Clone prezto
+  git: repo=https://github.com/sorin-ionescu/prezto.git
+       dest={{ ansible_env.HOME }}/.zprezto
+       update=no
+
+- name: Symlink add configuration prezto zlogin
+  file: src={{ ansible_env.HOME }}/.zprezto/runcoms/zlogin dest={{ ansible_env.HOME }}/.zlogin state=link
+
+- name: Symlink add configuration prezto zlogout
+  file: src={{ ansible_env.HOME }}/.zprezto/runcoms/zlogout dest={{ ansible_env.HOME }}/.zlogout state=link
+
+- name: Symlink add configuration prezto zprofile
+  file: src={{ ansible_env.HOME }}/.zprezto/runcoms/zprofile dest={{ ansible_env.HOME }}/.zprofile state=link
+
+- name: Template present prezto configuration .zpreztorc
+  template: src=zpreztorc.j2 dest={{ ansible_env.HOME }}/.zpreztorc
+
+- name: Template present prezto configuration .zshrc
+  template: src=prezto.zshrc.sh.j2 dest={{ ansible_env.HOME }}/.zsh/prezto.zshrc.sh
+
+- name: Check .zshrc source prezto.zshrc.sh
+  shell: cat {{ ansible_env.HOME }}/.zshrc | grep -c '~/.zsh/prezto.zshrc.sh'
+  failed_when: no
+  changed_when: False
+  register: command_result
+
+- name: Add .zshrc prezto.zshrc.sh
+  #先頭行にsedで入れてる。BSD sedだと\nで上手く改行が出力できないため
+  shell: LF=$(printf '\\\012_'); LF=${LF%_}; sed -i -e "1s/^/source \~\/.zsh\/prezto.zshrc.sh$LF/g" {{ ansible_env.HOME }}/.zshrc
+  when: command_result.stdout == "0"
+  notify:
+    - execute source .zshrc
