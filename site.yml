@@ -44,3 +44,4 @@
     - { role: homebrew/brew-cask/sourcetree }
     - { role: homebrew/brew-cask/bettertouchtool }
     - { role: homebrew/brew-cask/clipy }
+    - { role: homebrew/brew-cask/cyberduck }
