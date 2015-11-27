@@ -18,6 +18,7 @@
     - { role: python/pyenv/python-build }
     - { role: fonts/ricty-diminished/install }
     - { role: fonts/source-han-code-jp/install }
+    - { role: fonts/hack/install }
     - { role: homebrew/install }
     - { role: tree/install }
     - { role: nkf/install }
