@@ -1,0 +1,4 @@
+- name: Install the java in the brew-cask
+  homebrew_cask: name=java state=present
+  when: "ansible_os_family == 'Darwin'"
+
