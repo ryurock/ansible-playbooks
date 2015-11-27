@@ -1,0 +1,11 @@
+- name: Fetch get_url Hack-Bold.ttf
+  get_url: url=https://github.com/chrissimpkins/Hack/raw/master/build/ttf/Hack-Bold.ttf dest={{ ansible_env.HOME }}/Library/Fonts/Hack-Bold.ttf mode=0755
+
+- name: Fetch get_url Hack-BoldItalic.ttf
+  get_url: url=https://github.com/chrissimpkins/Hack/raw/master/build/ttf/Hack-BoldItalic.ttf dest={{ ansible_env.HOME }}/Library/Fonts/Hack-BoldItalic.ttf mode=0755
+
+- name: Fetch get_url Hack-Italic.ttf
+  get_url: url=https://github.com/chrissimpkins/Hack/raw/master/build/ttf/Hack-Italic.ttf dest={{ ansible_env.HOME }}/Library/Fonts/Hack-Italic.ttf mode=0755
+
+- name: Fetch get_url Hack-Regular.ttf 
+  get_url: url=https://github.com/yascentur/RictyDiminished/raw/master/RictyDiminished-Oblique.ttf dest={{ ansible_env.HOME }}/Library/Fonts/Hack-Regular.ttf mode=0755
