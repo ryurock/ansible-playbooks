@@ -41,3 +41,4 @@
     - { role: homebrew/brew-cask/virtualbox }
     - { role: homebrew/brew-cask/vagrant }
     - { role: homebrew/brew-cask/sublime-text }
+    - { role: homebrew/brew-cask/sourcetree }

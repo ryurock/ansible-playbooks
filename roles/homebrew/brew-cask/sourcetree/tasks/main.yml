@@ -1,0 +1,3 @@
+- name: Install the sourcetree in the brew-cask
+  homebrew_cask: name=sourcetree state=present
+  when: "ansible_os_family == 'Darwin'"
