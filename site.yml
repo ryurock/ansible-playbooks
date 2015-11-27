@@ -40,3 +40,4 @@
     - { role: homebrew/brew-cask/coteditor }
     - { role: homebrew/brew-cask/virtualbox }
     - { role: homebrew/brew-cask/vagrant }
+    - { role: homebrew/brew-cask/sublime-text }
