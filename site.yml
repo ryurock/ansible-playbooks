@@ -48,3 +48,4 @@
     - { role: homebrew/brew-cask/clipy }
     - { role: homebrew/brew-cask/cyberduck }
     - { role: homebrew/brew-cask/slack }
+    - { role: homebrew/brew-cask/caffeine }
