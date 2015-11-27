@@ -1,0 +1,3 @@
+- name: Install the bettertouchtool in the brew-cask
+  homebrew_cask: name=bettertouchtool state=present
+  when: "ansible_os_family == 'Darwin'"
