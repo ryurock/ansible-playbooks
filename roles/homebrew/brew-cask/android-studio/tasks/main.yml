@@ -1,0 +1,4 @@
+- name: Install the android-studio in the brew-cask
+  homebrew_cask: name=android-studio state=present
+  when: "ansible_os_family == 'Darwin'"
+
