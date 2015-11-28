@@ -196,7 +196,7 @@ let g:airline#extensions#tabline#enabled = 1
 " カーソル行をハイライト
 set cursorline
 hi clear CursorLine
-highlight CursorLine cterm=underline ctermfg=lightgray guibg=darkgray
+hi CursorLineNr term=bold cterm=NONE ctermfg=228 ctermbg=NONE
 
 "カーソルが何行目の何列目に置かれているかを表示する
 set ruler
@@ -228,7 +228,13 @@ nmap <Space> [unite]
 "スペースキーとfキーでバッファと最近開いたファイル一覧を表示
 nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer file_mru<CR>
 "スペースキーとeキーでVimfilerの起動
-nnoremap <silent> [unite]f :<C-u>VimFiler<CR>
+"nnoremap <silent> <Space>f :<C-u>VimFiler<CR>
+""スペースキーとsキーでVimShellの起動
+nnoremap <silent> <Space>s :<C-u>VimShell<CR>
+"スペースキーとcキーでset pasteの実行
+"nnoremap <silent> <Space>c :<C-u>set<Space>paste<CR>
+""スペースキーとvキーでset nopasteの実行
+nnoremap <silent> <Space>v :<C-u>set<Space>nopaste<CR>
 
 
 """"""""""""""""""""""""""""""
