@@ -51,3 +51,4 @@
     - { role: homebrew/brew-cask/cyberduck }
     - { role: homebrew/brew-cask/slack }
     - { role: homebrew/brew-cask/caffeine }
+    - { role: homebrew/brew-cask/dropbox }
