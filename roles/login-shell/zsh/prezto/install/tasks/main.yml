@@ -18,17 +18,10 @@
 - name: Template present prezto initialize file .zshrc
   template: src=prezto.init.sh.j2 dest={{ ansible_env.HOME }}/.zsh/prezto.init.sh
 
-- name: Check .zshrc source prezto.init.sh
-  shell: cat {{ ansible_env.HOME }}/.zshrc | grep -c '~/.zsh/prezto.init.sh'
-  failed_when: no
-  changed_when: False
-  register: command_result
-
 - name: Add .zshrc prezto.init.sh
   lineinfile:
     dest={{ ansible_env.HOME }}/.zshrc
     line="source ~/.zsh/prezto.init.sh"
     insertbefore=BOF state=present regexp="prezto\.init\.sh"
-  when: command_result.stdout == "0"
   notify:
     - execute source .zshrc
