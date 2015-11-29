@@ -1,0 +1,25 @@
+- name: Check nodebrew build nodejs varsion {{ nodeBuildVersion }}
+  stat: path={{ ansible_env.HOME }}/.nodebrew/src/{{ nodeBuildVersion }}
+  register: node_build_version_dir
+
+- name: Install binary NodeJS from nodebrew
+  shell: ~/.nodebrew/current/bin/nodebrew install-binary {{ nodeBuildVersion }}
+  when: node_build_version_dir.stat.exists == False
+
+- name: Check nodebrew alias file version
+  shell: cat {{ ansible_env.HOME }}/.nodebrew/alias | grep -c 'default = {{ nodeBuildVersion }}'
+  failed_when: no
+  changed_when: False
+  register: command_result
+
+- name: Create alias default
+  shell: ~/.nodebrew/current/bin/nodebrew alias default {{ nodeBuildVersion }}
+  when: command_result.stdout == "0"
+
+- name: Check current dir
+  stat: path={{ ansible_env.HOME }}/.nodebrew/current
+  register: nodebrew_current
+
+- name: Set default nodejs version {{ nodeBuildVersion }}
+  shell: ~/.nodebrew/current/bin/nodebrew use default
+  when: nodebrew_current.stat.lnk_source != "{{ ansible_env.HOME }}/.nodebrew/node/{{ nodeBuildVersion }}"
