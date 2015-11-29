@@ -21,6 +21,7 @@
     - { role: ruby/rbenv/plugins/rbenv-gem-rehash }
     - { role: ruby/rbenv/plugins/rbenv-binstubs }
     - { role: nodejs/nodebrew/install }
+    - { role: nodejs/nodebrew/nodejs-build }
     - { role: fonts/ricty-diminished/install }
     - { role: fonts/source-han-code-jp/install }
     - { role: fonts/hack/install }

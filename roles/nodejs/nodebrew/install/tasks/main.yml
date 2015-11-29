@@ -1,4 +1,9 @@
-- include: osx.yml
-  when: "ansible_os_family == 'Darwin'"
+- name: File exists nodebrew bin file
+  stat: path={{ ansible_env.HOME }}/.nodebrew/current/bin/nodebrew
+  register: nodebrew_bin
+
+- name: Install nodebrew use nodebrew installer
+  shell: curl -L git.io/nodebrew | perl - setup
+  when: nodebrew_bin.stat.exists == False
 
 - include: add_shell_dotfile.yml

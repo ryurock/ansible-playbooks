@@ -27,26 +27,11 @@
     file path={{ shell_dotfile_dir.stdout }} state=directory mode=0755
 
 - name: Template present nodebrew.sh
-  action:
-    template src=nodebrew.sh.j2 dest={{ shell_dotfile_dir.stdout }}/nodebrew.sh
- 
-- name: Check shell_dotfile source nodebrew.sh
-  action:
-    shell cat {{ shell_dotfile.stdout }} | grep -c 'source {{ shell_dotfile_dir.stdout }}/nodebrew.sh'
-  failed_when: no
-  changed_when: False
-  register: command_result
+  template: src=nodebrew.sh.j2 dest={{ shell_dotfile_dir.stdout }}/nodebrew.sh
 
 - name: Add shell_dotfile source nodebrew.sh
-  action: 
-    lineinfile dest={{shell_dotfile.stdout}} line='source {{ shell_dotfile_dir.stdout }}/nodebrew.sh'
-  when: command_result.stdout == "0"
-  notify:
-    - execute source shell_dotfile
-
-- name: Shell of the added configuration file is rewritten in the case of bash
-  action: 
-    replace dest={{shell_dotfile_dir.stdout}}/nodebrew.sh regexp='pyenv init - zsh' replace='pyenv init -'
-  when: shell_dotfile.stdout == "~/.bashrc"
+  lineinfile:
+    dest={{shell_dotfile.stdout}}
+    line='source {{ shell_dotfile_dir.stdout }}/nodebrew.sh'
   notify:
     - execute source shell_dotfile
