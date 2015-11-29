@@ -34,40 +34,23 @@ NeoBundle 'Shougo/vimproc.vim', {
 " Unite
 NeoBundle 'Shougo/unite.vim'
 
-" vimでshell実行
-NeoBundle 'Shougo/vimshell'
-
-" alfred的なファイル検索
-NeoBundle 'Shougo/neomru.vim'
 " ソースのアウトライン表示
 NeoBundle 'Shougo/unite-outline'
 
 " VimFiler
 NeoBundle 'Shougo/vimfiler'
 
+" alfred的なファイル検索
+NeoBundle 'Shougo/neomru.vim'
+
 " ステータスラインの強化
-NeoBundle 'bling/vim-airline'
+NeoBundle 'itchyny/lightline.vim'
 
 " uniteでカラースキーマ :Unite -auto-preview colorscheme でプレビューできる
 NeoBundle 'ujihisa/unite-colorscheme'
 
-" Vimの入力補完
-" see http://qiita.com/hide/items/229ff9460e75426a2d07
-NeoBundle 'Shougo/neocomplcache'
-
-" neocomplcacheの設定 ----- Start -----
-
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-
-" neocomplcacheの設定 ----- End -----
+" ソースコードsyntax プラグイン
+NeoBundle 'scrooloose/syntastic'
 
 "  scroll に加速機能をつける
 NeoBundle 'yonchu/accelerated-smooth-scroll'
@@ -94,6 +77,8 @@ NeoBundleCheck
 " 標準的な設定
 """"""""""""""""""""""""""""""
 
+" 貼付けモードにしてautoインデントを無効にする
+set paste
 
 " INSERT時にバックスペースをバックスペースとして動作させる。see http://qiita.com/omega999/items/23aec6a7f6d6735d033f
 set backspace=2
@@ -184,10 +169,97 @@ set display+=lastline
 """"""""""""""""""""""""""""""
 " ステータスラインを常に表示
 set laststatus=2
+
+" ステータスラインにエラーメッセージを追加する
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
 " ステータスラインに文字コードと改行文字を表示する
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
-" vim-airlineでタブもairline風に表示させる
-let g:airline#extensions#tabline#enabled = 1
+
+if !has('gui_running')
+  set t_Co=256
+endif
+
+" lightlineの設定
+let g:lightline = {
+        \ 'mode_map': {'c': 'NORMAL'},
+        \ 'active': {
+        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+        \ },
+        \ 'component_function': {
+        \   'modified': 'MyModified',
+        \   'readonly': 'MyReadonly',
+        \   'fugitive': 'MyFugitive',
+        \   'filename': 'MyFilename',
+        \   'fileformat': 'MyFileformat',
+        \   'filetype': 'MyFiletype',
+        \   'fileencoding': 'MyFileencoding',
+        \   'mode': 'MyMode'
+        \ },
+        \ 'component_expand': {
+        \   'syntastic': 'SyntasticStatuslineFlag'
+        \ },
+        \ 'component_type': {
+        \   'syntastic': 'error'
+        \ }
+        \ }
+
+let g:syntastic_mode_map = { 'mode': 'passive' }
+augroup AutoSyntastic
+  autocmd!
+  autocmd BufWritePost *.c,*.cpp call s:syntastic()
+augroup END
+function! s:syntastic()
+  SyntasticCheck
+  call lightline#update()
+endfunction
+
+function! MyModified()
+  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! MyReadonly()
+  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
+endfunction
+
+function! MyFilename()
+  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \  &ft == 'unite' ? unite#get_status_string() :
+        \  &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ '' != expand('%:p') ? expand('%:p') : '[No Name]') .
+        \ ('' != MyModified() ? ' ' . MyModified() : '')
+endfunction
+
+function! MyFugitive()
+  try
+    if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+      return fugitive#head()
+    endif
+  catch
+  endtry
+  return ''
+endfunction
+
+function! MyFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! MyFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+function! MyFileencoding()
+  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+function! MyMode()
+  return winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+
+" lightlineの設定 End ----------------------
 
 
 """"""""""""""""""""""""""""""
@@ -229,8 +301,6 @@ nmap <Space> [unite]
 nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer file_mru<CR>
 " スペースキーとeキーでVimfilerの起動
 nnoremap <silent> <Space>f :<C-u>VimFiler<CR>
-" スペースキーとsキーでVimShellの起動
-nnoremap <silent> <Space>s :<C-u>VimShell<CR>
 " スペースキーとcキーでset pasteの実行
 nnoremap <silent> <Space>c :<C-u>set<Space>paste<CR>
 " スペースキーとvキーでset nopasteの実行
