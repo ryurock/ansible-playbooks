@@ -223,17 +223,17 @@ set history=1000
 """"""""""""""""""""""""""""""
 "キーマップ
 """"""""""""""""""""""""""""""
-"prefix keyの設定
+" prefix keyの設定
 nmap <Space> [unite]
-"スペースキーとfキーでバッファと最近開いたファイル一覧を表示
+" スペースキーとfキーでバッファと最近開いたファイル一覧を表示
 nnoremap <silent> [unite]b :<C-u>Unite<Space>buffer file_mru<CR>
-"スペースキーとeキーでVimfilerの起動
-"nnoremap <silent> <Space>f :<C-u>VimFiler<CR>
-""スペースキーとsキーでVimShellの起動
+" スペースキーとeキーでVimfilerの起動
+nnoremap <silent> <Space>f :<C-u>VimFiler<CR>
+" スペースキーとsキーでVimShellの起動
 nnoremap <silent> <Space>s :<C-u>VimShell<CR>
-"スペースキーとcキーでset pasteの実行
-"nnoremap <silent> <Space>c :<C-u>set<Space>paste<CR>
-""スペースキーとvキーでset nopasteの実行
+" スペースキーとcキーでset pasteの実行
+nnoremap <silent> <Space>c :<C-u>set<Space>paste<CR>
+" スペースキーとvキーでset nopasteの実行
 nnoremap <silent> <Space>v :<C-u>set<Space>nopaste<CR>
 
 
