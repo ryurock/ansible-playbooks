@@ -9,6 +9,13 @@
   roles:
     - { role: login-shell/dotfile/common }
     - { role: login-shell/zsh/prezto/install }
+    - { role: tree/install }
+    - { role: nkf/install }
+    - { role: curl/install }
+    - { role: nmap/install }
+    - { role: wget/install }
+    - { role: peco/install }
+    - { role: readline/install }
     - { role: git/gitconfig }
     - { role: vim/install }
     - { role: vim/vimrc }
@@ -26,12 +33,6 @@
     - { role: fonts/source-han-code-jp/install }
     - { role: fonts/hack/install }
     - { role: homebrew/install }
-    - { role: tree/install }
-    - { role: nkf/install }
-    - { role: curl/install }
-    - { role: nmap/install }
-    - { role: wget/install }
-    - { role: peco/install }
     - { role: peco/add-configration }
     - { role: homebrew/brew/cask }
     - { role: homebrew/brew-cask/iterm2 }
