@@ -1,0 +1,3 @@
+- name: Install the jq in the brew.
+  homebrew: name=jq state=present
+  when: "ansible_os_family == 'Darwin'"

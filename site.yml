@@ -16,6 +16,7 @@
     - { role: wget/install }
     - { role: peco/install }
     - { role: readline/install }
+    - { role: jq/install }
     - { role: git/gitconfig }
     - { role: vim/install }
     - { role: vim/vimrc }
