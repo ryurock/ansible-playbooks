@@ -27,6 +27,8 @@
     - { role: ruby/rbenv/plugins/ruby-build/build }
     - { role: ruby/rbenv/plugins/rbenv-gem-rehash }
     - { role: ruby/rbenv/plugins/rbenv-binstubs }
+    - { role: ruby/gem/packages/sass }
+    - { role: ruby/gem/packages/compass }
     - { role: nodejs/nodebrew/install }
     - { role: nodejs/nodebrew/nodejs-build }
     - { role: fonts/ricty-diminished/install }

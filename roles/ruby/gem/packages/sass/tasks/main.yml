@@ -1,0 +1,2 @@
+- name: Install gem sass
+  gem: name=sass state=present
