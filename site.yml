@@ -31,6 +31,8 @@
     - { role: ruby/gem/packages/compass }
     - { role: nodejs/nodebrew/install }
     - { role: nodejs/nodebrew/nodejs-build }
+    - { role: nodejs/npm/packages/gulp/install }
+    - { role: nodejs/npm/packages/forever/install }
     - { role: fonts/ricty-diminished/install }
     - { role: fonts/source-han-code-jp/install }
     - { role: fonts/hack/install }
