@@ -23,6 +23,7 @@
     - { role: vim/color-scheme/hybrid }
     - { role: python/pyenv/install }
     - { role: python/pyenv/python-build }
+    - { role: python/pip/packages/awscli/install }
     - { role: ruby/rbenv/install }
     - { role: ruby/rbenv/plugins/ruby-build/build }
     - { role: ruby/rbenv/plugins/rbenv-gem-rehash }
