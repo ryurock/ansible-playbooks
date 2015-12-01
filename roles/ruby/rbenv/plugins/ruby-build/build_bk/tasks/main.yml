@@ -1,0 +1,13 @@
+- name: Check rbenv Plugin ruby-build Installed
+  shell: source /etc/profile; rbenv versions | grep -c '{{ rubyBuildVersion }}'
+  failed_when: no
+  changed_when: False
+  register: result
+
+- name: Install Ruby from rbenv With ruby-build
+  shell: source /etc/profile; rbenv install {{ rubyBuildVersion }}
+  when: result.stdout.find('{{ rubyBuildVersion }}') == 0
+
+- name: Build ruby change global
+  shell: source /etc/profile; rbenv global {{ rubyBuildVersion }}; rbenv rehash
+  when: result.stdout.find('{{ rubyBuildVersion }}') == 0
