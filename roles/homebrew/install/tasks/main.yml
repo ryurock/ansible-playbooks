@@ -4,4 +4,6 @@
 
 - name: Install homebrew
   shell: ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  when: installed.stat.exists == false
+  when:
+   - "ansible_os_family == 'Darwin'"
+   - installed.stat.exists == false
