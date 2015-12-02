@@ -40,6 +40,7 @@
     - { role: fonts/source-han-code-jp/install }
     - { role: fonts/hack/install }
     - { role: peco/add-configration }
+    - { role: packer/install }
     - { role: homebrew/install }
     - { role: homebrew/brew/cask }
     - { role: homebrew/brew-cask/iterm2 }
