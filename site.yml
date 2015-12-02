@@ -40,6 +40,7 @@
     - { role: fonts/source-han-code-jp/install }
     - { role: fonts/hack/install }
     - { role: peco/add-configration }
+    - { role: vagrant/install }
     - { role: packer/install }
     - { role: homebrew/install }
     - { role: homebrew/brew/cask }
@@ -54,7 +55,6 @@
     - { role: homebrew/brew-cask/android-studio }
     - { role: homebrew/brew-cask/coteditor }
     - { role: homebrew/brew-cask/virtualbox }
-    - { role: homebrew/brew-cask/vagrant }
     - { role: homebrew/brew-cask/sublime-text }
     - { role: homebrew/brew-cask/sourcetree }
     - { role: homebrew/brew-cask/bettertouchtool }
