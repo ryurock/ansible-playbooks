@@ -1,0 +1,4 @@
+- name: Install packer from homebrew
+  action:
+    homebrew name=packer state=present
+  when: "ansible_os_family == 'Darwin'"
