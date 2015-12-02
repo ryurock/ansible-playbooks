@@ -39,8 +39,8 @@
     - { role: fonts/ricty-diminished/install }
     - { role: fonts/source-han-code-jp/install }
     - { role: fonts/hack/install }
-    - { role: homebrew/install }
     - { role: peco/add-configration }
+    - { role: homebrew/install }
     - { role: homebrew/brew/cask }
     - { role: homebrew/brew-cask/iterm2 }
     - { role: homebrew/brew-cask/karabiner }
@@ -63,3 +63,4 @@
     - { role: homebrew/brew-cask/caffeine }
     - { role: homebrew/brew-cask/dropbox }
     - { role: homebrew/brew-cask/skitch }
+    - { role: homebrew/brew-cask/google-drive }
