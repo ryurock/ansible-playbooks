@@ -1,0 +1,3 @@
+- name: Install the google-drive in the brew-cask
+  homebrew_cask: name=google-drive state=present
+  when: "ansible_os_family == 'Darwin'"
